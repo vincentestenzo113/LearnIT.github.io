@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, black, red, blue);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #profile-info {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #profile-info p {
+            margin: 10px 0;
+        }
+        #logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <button id="logout-btn" onclick="logout()">Logout</button>
+    <h1>User Profile</h1>
+    <div id="profile-info">
+        <p><strong>Name: Vincent Estenzo</strong> <span id="user-name"></span></p>
+        <p><strong>Email: vincentestenzo1@gmail.com</strong> <span id="user-email"></span></p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+    apiKey: "AIzaSyAzUrG6mSMy50UObXL02q1FL82Vq8d2iBQ",
+    authDomain: "learnitauth.firebaseapp.com",
+    projectId: "learnitauth",
+    storageBucket: "learnitauth.appspot.com",
+    messagingSenderId: "267511256656",
+    appId: "1:267511256656:web:d245c52f4b18eefa5b2355"
+  };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+
+        // Check if user is logged in
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in
+                var userId = user.uid;
+                var userRef = database.ref('users/' + userId);
+
+                // Get user data from database
+                userRef.once('value', function(snapshot) {
+                    var userData = snapshot.val();
+                    document.getElementById('user-name').textContent = userData.full_name;
+                    document.getElementById('user-email').textContent = userData.email;
+                });
+            } else {
+                // User is not signed in
+                window.location.href = 'login.html'; // Redirect to login page
+            }
+        });
+
+        // Logout function
+        function logout() {
+            auth.signOut().then(function() {
+                // Sign-out successful.
+                window.location.href = 'login.html'; // Redirect to login page
+            }).catch(function(error) {
+                // An error happened.
+                console.error(error.message);
+            });
+        }
+    </script>
+</body>
+</html>
