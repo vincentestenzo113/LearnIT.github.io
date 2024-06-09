@@ -48,7 +48,7 @@ var firebaseConfig = {
             // Add this user to Firebase Database
             var database_ref = database.ref();
 
-            // Create User data
+            // Create User data with variable email full_name last_login and values of email full_name and Date.now()
             var user_data = {
                 email: email,
                 full_name: full_name,
