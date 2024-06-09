@@ -82,11 +82,11 @@
             }
         });
 
-        // Logout function
+        // Log-out function
         function logout() {
             auth.signOut().then(function() {
-                // Sign-out successful.
-                window.location.href = 'login.html'; // Redirect to login page
+                // Log-out successful
+                window.location.href = 'login.html'; // back to page
             }).catch(function(error) {
                 // An error happened.
                 console.error(error.message);
