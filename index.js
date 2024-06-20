@@ -19,6 +19,7 @@ var firebaseConfig = {
     email = document.getElementById('email').value
     password = document.getElementById('password').value
     full_name = document.getElementById('full_name').value
+    username = document.getElementById('username').value
 
     // Validate input fields
     if (validate_email(email) == false || validate_password(password) == false) {
