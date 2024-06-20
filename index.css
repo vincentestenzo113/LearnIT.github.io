@@ -110,6 +110,8 @@ input {
     border-image: -webkit-linear-gradient(25deg, #070707, #FB5607, #FF006E, #8338EC, #3A86FF) 1;
 }
 
+/*Edits button's styles*/
+
 #button_container {
     width: 100%;
     height: 10%;
