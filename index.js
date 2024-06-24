@@ -22,7 +22,7 @@ var firebaseConfig = {
 
     // Validate input fields
     if (validate_email(email) == false || validate_password(password) == false) {
-        alert('Email or Password is wrong or empty.')
+        alert('Make sure the email or password is not wrong or empty.')
         return
         // Don't continue running the code
     }
