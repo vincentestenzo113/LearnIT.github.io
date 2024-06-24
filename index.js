@@ -19,7 +19,6 @@ var firebaseConfig = {
     email = document.getElementById('email').value
     password = document.getElementById('password').value
     full_name = document.getElementById('full_name').value
-    username = document.getElementById('username').value
 
     // Validate input fields
     if (validate_email(email) == false || validate_password(password) == false) {
@@ -32,7 +31,7 @@ var firebaseConfig = {
     // Move on with Auth
     auth.createUserWithEmailAndPassword(email, password)
         .then(function () {
-            // Declare user variable
+            // add user variable
             var user = auth.currentUser;
 
             // Send email verification
@@ -42,7 +41,7 @@ var firebaseConfig = {
                     alert('Email verification sent! Please check your email to verify your account.');
                 })
                 .catch(function (error) {
-                    // An error happened.
+                    // There is an error update
                     alert('Error sending email verification: ' + error.message);
                 });
 
@@ -56,10 +55,10 @@ var firebaseConfig = {
                 last_login: Date.now()
             };
 
-            // Push to Firebase Database
+            
             database_ref.child('users/' + user.uid).set(user_data);
 
-            // Done
+            // it alerts that you already created an account
             alert('User Created!! Please verify your email before logging in.');
         })
         .catch(function (error) {
